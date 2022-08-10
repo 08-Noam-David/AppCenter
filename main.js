@@ -15,7 +15,7 @@ const renderAppCardLogo = (app) => {
   appLogo.addEventListener('error', () => {
     appLogo.src = 'images/Help.png';
     appLogo.alt = 'Unkown logo';
-  })
+  });
 
   const appLogoContainer = document.createElement('div');
   appLogoContainer.classList.add('col-md-4');
@@ -73,6 +73,11 @@ const renderAppData = () => {
   data.map(createAppCard).forEach((card) => appCardList.appendChild(card));
 };
 
+const navigateToAddAppPage = () => location.assign('addApplication.html');
+
 document.addEventListener('DOMContentLoaded', () => {
   renderAppData();
+  document
+    .querySelector('#publishAppButton')
+    .addEventListener('click', navigateToAddAppPage);
 });
