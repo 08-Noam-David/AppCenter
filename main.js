@@ -61,7 +61,7 @@ const createAppCard = (app) => {
   appCardConatiner.appendChild(appDetails);
 
   const appCard = document.createElement('article');
-  appCard.classList.add('card', 'mt-2');
+  appCard.classList.add('card', 'mt-2', 'border-0');
   appCard.appendChild(appCardConatiner);
 
   return appCard;
