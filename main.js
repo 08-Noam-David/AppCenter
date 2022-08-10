@@ -10,7 +10,6 @@ const getData = () => {
 const renderAppCardLogo = (app) => {
   const appLogo = document.createElement('img');
   appLogo.src = `images/${app.id}/${app.imageUrl}`;
-  appLogo.classList.add('rounded-start');
   appLogo.alt = `Logo of ${app.name}`;
   appLogo.style.height = '136px';
   appLogo.addEventListener('error', () => {
