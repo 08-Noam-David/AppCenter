@@ -14,6 +14,14 @@ const getNextId = () => {
   return id;
 };
 
+const checkLocalStorage = () => {
+  const data = localStorage.getItem('applications');
+
+  if(data || !Array.isArray(JSON.parse(data))) {
+    location.assign('mainPage.html');
+  }
+};
+
 const handlePublishForm = (event) => {
   event.preventDefault();
   const form = event.target;
