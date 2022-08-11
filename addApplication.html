@@ -25,7 +25,7 @@
     </header>
 
     <main>
-      <form id="appPublishForm" class="container">
+      <form id="appPublishForm" class="container" novalidate>
         <div class="row mb-3">
           <label for="name" class="col-sm-2 col-form-label"> App name*: </label>
           <div class="col-sm-10">
@@ -99,6 +99,11 @@
         </div>
 
         <button type="submit" class="btn btn-success">Publish app</button>
+
+        <p id="invalidAlert" class="invisible text-danger">
+          Oops something went wrong!<br />
+          Check 
+        </p>
       </form>
     </main>
 
