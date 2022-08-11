@@ -17,7 +17,7 @@ const getNextId = () => {
 const checkLocalStorage = () => {
   const data = localStorage.getItem('applications');
 
-  if(data || !Array.isArray(JSON.parse(data))) {
+  if(data === null || !Array.isArray(JSON.parse(data))) {
     location.assign('mainPage.html');
   }
 };
@@ -27,7 +27,11 @@ const handlePublishForm = (event) => {
   const form = event.target;
   const alert = document.querySelector('#invalidAlert');
 
-  if(form.reportValidity()) {
+  const isValid = [...form.elements]
+    .map(el => el.checkValidity())
+    .every(valid => valid);
+
+  if(isValid) {
     if (form.classList.contains('was-validated')) {
       form.classList.remove('was-validated');
     }
@@ -36,11 +40,11 @@ const handlePublishForm = (event) => {
 
     addItemToTheList({
       id: getNextId(),
-      imageUrl: form.elements['ImageUrl'],
-      name: form.elements['name'],
-      price: form.elements['price'],
-      desc: form.elements['description'],
-      companyName: form.elements['companyName']
+      imageUrl: form.elements['ImageUrl'].value,
+      name: form.elements['name'].value,
+      price: form.elements['price'].value,
+      desc: form.elements['description'].value,
+      companyName: form.elements['companyName'].value
     });
 
     location.assign('mainPage.html');
@@ -56,6 +60,7 @@ const handlePublishForm = (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  checkLocalStorage();
   document
     .querySelector('#appPublishForm')
     .addEventListener('submit', handlePublishForm);
