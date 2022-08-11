@@ -11,7 +11,7 @@ const renderAppCardLogo = (app) => {
   const appLogo = document.createElement('img');
   appLogo.src = `images/${app.id}/${app.imageUrl}`;
   appLogo.alt = `Logo of ${app.name}`;
-  appLogo.style.height = '136px';
+  appLogo.style.height = '160px';
   appLogo.addEventListener('error', () => {
     appLogo.src = 'images/Help.png';
     appLogo.alt = 'Unkown logo';
@@ -33,9 +33,10 @@ const renderAppCardBody = (app) => {
   const appDetails = document.createElement('p');
   appDetails.classList.add('card-text');
   appDetails.innerText = `
-    Price: ${app.price}
-    Company name: ${app.companyName}
-    `;
+  ${app.desc}
+  Price: ${app.price}
+  Company name: ${app.companyName}
+  `;
 
   const cardBody = document.createElement('div');
   cardBody.classList.add('card-body');
