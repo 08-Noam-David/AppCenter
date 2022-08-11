@@ -67,18 +67,34 @@ const createAppCard = (app) => {
   return appCard;
 };
 
-const renderAppData = () => {
-  const data = getData();
+const renderAppData = (arr) => {
   const appCardList = document.querySelector('main');
 
-  data.map(createAppCard).forEach((card) => appCardList.appendChild(card));
+  appCardList.innerText = '';
+  arr.map(createAppCard).forEach((card) => appCardList.appendChild(card));
 };
 
 const navigateToAddAppPage = () => location.assign('addApplication.html');
 
+const handleSearch = (event) => {
+  const query = event.target.value.trim();
+
+  if (query !== '') {
+    const data = getData().filter((app) =>
+      app.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    renderAppData(data);
+  } else {
+    renderAppData(getData());
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderAppData();
+  renderAppData(getData());
   document
     .querySelector('#publishAppButton')
     .addEventListener('click', navigateToAddAppPage);
+
+  document.querySelector('#searchBox').addEventListener('input', handleSearch);
 });
