@@ -18,10 +18,10 @@
     />
   </head>
   <body>
-    <header class="container text-center">
+    <header class="container text-center mb-3">
       <!-- TODO: Add alt, width and height -->
       <!-- TODO: Add styling from mainPage.html -->
-      <img src="images/AppsCenter.png" />
+      <img src="images/AppsCenter.png" class="img-fluid" />
     </header>
 
     <main>
@@ -54,6 +54,7 @@
               id="price"
               class="form-control"
               placeholder="App price in $"
+              min="0"
               required
             />
           </div>
@@ -92,24 +93,41 @@
         </div>
 
         <div class="row mb-3">
-            <label for="ImageUrl" class="col-sm-2 col-form-label">Image URL:</label>
-            <div class="col-sm-10">
-                <input type="text" name="ImageUrl" id="ImageUrl" class="form-control" placeholder="Image URL" maxlength="300">
-            </div>
+          <label for="ImageUrl" class="col-sm-2 col-form-label">
+            Image URL:
+          </label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              name="ImageUrl"
+              id="ImageUrl"
+              class="form-control"
+              placeholder="Image URL"
+              maxlength="300"
+            />
+          </div>
         </div>
 
-        <button type="submit" class="btn btn-success">Publish app</button>
+        <div class="row mb-3">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <button type="submit" class="btn btn-success">Publish app</button>
+          </div>
+        </div>
 
-        <p id="invalidAlert" class="invisible text-danger">
-          Oops something went wrong!<br />
-          Check 
-        </p>
+        <p class="fw-bold">* - Required</p>
+
+        <div class="row m-0">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <p id="invalidAlert" class="invisible text-danger text-center">
+              Oops something went wrong!<br />
+              Check your fields again.
+            </p>
+          </div>
+        </div>
       </form>
     </main>
-
-    <footer>
-      <span class="fw-bold">* - Required</span>
-    </footer>
     <script src="AddApp.js"></script>
   </body>
 </html>
