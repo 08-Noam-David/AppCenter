@@ -20,8 +20,10 @@
   <body>
     <header class="container text-center">
       <!-- TODO: Add alt, width and height -->
+      <!-- TODO: Add styling from mainPage.html -->
       <img src="images/AppsCenter.png" />
     </header>
+
     <main>
       <form id="appPublishForm" class="container">
         <div class="row mb-3">
@@ -40,7 +42,8 @@
             />
           </div>
         </div>
-        <div class="row mb-2">
+
+        <div class="row mb-3">
           <label form="price" class="col-sm-2 col-form-label">
             App price*:
           </label>
@@ -55,7 +58,8 @@
             />
           </div>
         </div>
-        <div class="row mb-2">
+
+        <div class="row mb-3">
           <label for="description" class="col-sm-2 col-form-label">
             App description:
           </label>
@@ -70,7 +74,8 @@
             ></textarea>
           </div>
         </div>
-        <div class="row mb-2">
+
+        <div class="row mb-3">
           <label for="companyName" class="col-sm-2 col-form-label">
             Company name:
           </label>
@@ -85,12 +90,14 @@
             />
           </div>
         </div>
-        <div class="row mb-2">
+
+        <div class="row mb-3">
             <label for="ImageUrl" class="col-sm-2 col-form-label">Image URL:</label>
             <div class="col-sm-10">
                 <input type="text" name="ImageUrl" id="ImageUrl" class="form-control" placeholder="Image URL" maxlength="300">
             </div>
         </div>
+
         <button type="submit" class="btn btn-success">Publish app</button>
       </form>
     </main>
