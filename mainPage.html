@@ -10,19 +10,23 @@
       href="favicon.ico"
       type="image/vnd.microsoft.icon"
     />
-    <link rel="stylesheet" href="assets/bootstrap.css">
-    <link rel="stylesheet" href="assets/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/bootstrap.css" />
+    <link rel="stylesheet" href="assets/bootstrap-icons.css" />
   </head>
   <body>
     <header class="container text-center mb-3">
-      <img src="images/AppsCenter.png" class="img-fluid mb-3" alt="AppsCenter. The center of apps" />
+      <img
+        src="images/AppsCenter.png"
+        class="img-fluid mb-3"
+        alt="AppsCenter. The center of apps"
+      />
       <div class="row g-2">
         <!-- https://stackoverflow.com/a/29783630 -->
         <div class="col-sm-8">
           <div class="input-group">
             <input type="text" id="searchBox" class="form-control" />
             <button type="button" id="searchButton" class="btn btn-light">
-              <i class="bi bi-search"></i>
+              <img src="images/icons/search.svg" alt="Search" />
             </button>
           </div>
         </div>
@@ -30,9 +34,9 @@
           href="addApplication.html"
           role="button"
           id="publishAppButton"
-          class="btn btn-success col-sm-4"
+          class="btn btn-success col-sm-4 text-dark"
         >
-          <i class="bi bi-plus"></i>
+          <img src="images/icons/plus.svg" aria-hidden="true" />
           Publish new app
         </a>
       </div>
