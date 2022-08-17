@@ -74,8 +74,6 @@ const renderAppData = (arr) => {
   arr.map(createAppCard).forEach((card) => appCardList.appendChild(card));
 };
 
-const navigateToAddAppPage = () => location.assign('addApplication.html');
-
 const handleSearch = (event) => {
   const query = event.target.value.trim();
 
@@ -92,9 +90,6 @@ const handleSearch = (event) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderAppData(getData());
-  document
-    .querySelector('#publishAppButton')
-    .addEventListener('click', navigateToAddAppPage);
 
   document.querySelector('#searchBox').addEventListener('input', handleSearch);
 });
