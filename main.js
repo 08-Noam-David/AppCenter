@@ -22,7 +22,7 @@ const createAppCard = (app) => {
         />
       </div>
       <div class="col-md-8">
-        <button class="remove-button btn btn-danger position-absolute top-50 start-100 rounded-circle" type="button">
+        <button class="remove-button btn btn-danger position-absolute top-50 start-100 rounded-circle py-2" type="button">
           <svg
             id="i-trash"
             xmlns="http://www.w3.org/2000/svg"
