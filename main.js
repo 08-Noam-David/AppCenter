@@ -22,7 +22,11 @@ const createAppCard = (app) => {
         />
       </div>
       <div class="col-md-8">
-        <button class="remove-button btn btn-danger position-absolute top-50 start-100 rounded-circle py-2" type="button">
+        <button
+          class="remove-button btn btn-danger position-absolute top-50 start-100 rounded-circle py-2"
+          type="button"
+          data-app-id="${app.id}"
+        >
           <svg
             id="i-trash"
             xmlns="http://www.w3.org/2000/svg"
@@ -52,13 +56,31 @@ const createAppCard = (app) => {
   `;
 };
 
+const handleRemoveButtonClick = (event) => {
+  const id = parseInt(event.currentTarget.dataset.appId);
+
+  const indexToRemove = data.findIndex((app) => app.id === id);
+  if (indexToRemove !== -1) {
+  }
+};
+
 const renderAppData = (arr) => {
+  [...document.querySelectorAll('.remove-button')].forEach((el) =>
+    el.removeEventListener('click', handleRemoveButtonClick)
+  );
+
   const appCardList = document.querySelector('main');
 
   appCardList.innerHTML = arr.map(createAppCard).join('');
+
+  [...document.querySelectorAll('.remove-button')].forEach((el) =>
+    el.addEventListener('click', handleRemoveButtonClick)
+  );
 };
 
-const renderByQuery = (query) => {
+const handleSearch = (event) => {
+  const query = event.target.value.trim();
+
   if (query !== '') {
     const data = getData().filter((app) =>
       app.name.toLowerCase().includes(query.toLowerCase())
@@ -68,12 +90,6 @@ const renderByQuery = (query) => {
   } else {
     renderAppData(getData());
   }
-};
-
-const handleSearch = (event) => {
-  const query = event.target.value.trim();
-
-  renderByQuery(query);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
