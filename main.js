@@ -58,9 +58,7 @@ const renderAppData = (arr) => {
   appCardList.innerHTML = arr.map(createAppCard).join('');
 };
 
-const handleSearch = (event) => {
-  const query = event.target.value.trim();
-
+const renderByQuery = (query) => {
   if (query !== '') {
     const data = getData().filter((app) =>
       app.name.toLowerCase().includes(query.toLowerCase())
@@ -70,6 +68,12 @@ const handleSearch = (event) => {
   } else {
     renderAppData(getData());
   }
+};
+
+const handleSearch = (event) => {
+  const query = event.target.value.trim();
+
+  renderByQuery(query);
 };
 
 document.addEventListener('DOMContentLoaded', () => {
