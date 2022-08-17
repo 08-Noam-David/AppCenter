@@ -9,14 +9,15 @@ const getData = () => {
 
 const createAppCard = (app) => {
   return `
-  <div class="card mb-3 border border-0 mx-auto" style="max-width: 540px;">
+  <!-- https://stackoverflow.com/questions/39031224/how-to-center-cards-in-bootstrap-4 -->
+  <div class="card mb-3 border border-0 mx-auto" style="max-width: 35rem;">
     <div class="row g-0">
       <div class="col-md-4">
         <img 
           src="images/${app.id}/${app.imageUrl}"
           class="img-fluid app-logo"
           alt="Logo of ${app.name}"
-          style="height: 160px;"
+          style="height: 10rem;"
           onerror="this.src = 'images/Help.png';"
         />
       </div>
