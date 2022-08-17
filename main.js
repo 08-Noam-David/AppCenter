@@ -9,7 +9,7 @@ const getData = () => {
 
 const createAppCard = (app) => {
   return `
-  <div class="card mb-3 border border-0" style="max-width: 540px;">
+  <div class="card mb-3 border border-0 mx-auto" style="max-width: 540px;">
     <div class="row g-0">
       <div class="col-md-4">
         <img 
