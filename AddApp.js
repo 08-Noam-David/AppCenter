@@ -14,13 +14,6 @@ const getNextId = () => {
   return id;
 };
 
-const checkLocalStorage = () => {
-  const data = localStorage.getItem('applications');
-
-  if (data === null || !Array.isArray(JSON.parse(data))) {
-    location.assign('mainPage.html');
-  }
-};
 
 const handlePublishForm = (event) => {
   event.preventDefault();
@@ -60,7 +53,6 @@ const handlePublishForm = (event) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  checkLocalStorage();
   document
     .querySelector('#appPublishForm')
     .addEventListener('submit', handlePublishForm);
