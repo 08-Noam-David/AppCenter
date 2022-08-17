@@ -14,7 +14,6 @@ const getNextId = () => {
   return id;
 };
 
-
 const handlePublishForm = (event) => {
   event.preventDefault();
   const form = event.target;
