@@ -56,26 +56,47 @@ const createAppCard = (app) => {
   `;
 };
 
-const handleRemoveButtonClick = (event) => {
-  const id = parseInt(event.currentTarget.dataset.appId);
+// const handleRemoveButtonClick = (event) => {
+//   const id = parseInt(event.currentTarget.dataset.appId);
 
-  const indexToRemove = data.findIndex((app) => app.id === id);
-  if (indexToRemove !== -1) {
-  }
-};
+//   const indexToRemove = data.findIndex((app) => app.id === id);
+//   if (indexToRemove !== -1) {
+//     const removedApp = data.splice(indexToRemove, 1);
+
+//     const toastBody = document.querySelector('#removalToast .toast-body');
+//     toastBody.textContent = `${removedApp.name} successfuly deleted.`;
+
+//     const toast = new bootstrap.Toast(document.querySelector('#removalToast'));
+//     toast.show();
+
+//     /*
+//      * In case the user deletes an app while a search is active, the would
+//      * be the need to re-render the list whilst keeping the query active,.
+//      * Ideally, would've been done via a seperate method, but I
+//      * don't think that's possible due to hoisting shenanigans.
+//      * So it's done via triggering an 'input' event on #searchBox.
+//      */
+//     document.querySelector('#searchBox').dispatchEvent(
+//       new Event('input', {
+//         bubbles: true,
+//         cancelable: true,
+//       })
+//     );
+//   }
+// };
 
 const renderAppData = (arr) => {
-  [...document.querySelectorAll('.remove-button')].forEach((el) =>
-    el.removeEventListener('click', handleRemoveButtonClick)
-  );
+  // [...document.querySelectorAll('.remove-button')].forEach((el) =>
+  //   el.removeEventListener('click', handleRemoveButtonClick)
+  // );
 
   const appCardList = document.querySelector('main');
 
   appCardList.innerHTML = arr.map(createAppCard).join('');
 
-  [...document.querySelectorAll('.remove-button')].forEach((el) =>
-    el.addEventListener('click', handleRemoveButtonClick)
-  );
+  // [...document.querySelectorAll('.remove-button')].forEach((el) =>
+  //   el.addEventListener('click', handleRemoveButtonClick)
+  // );
 };
 
 const handleSearch = (event) => {
