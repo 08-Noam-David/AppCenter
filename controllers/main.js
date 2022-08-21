@@ -1,12 +1,3 @@
-const getData = () => {
-  if (localStorage.getItem('applications') == null) {
-    localStorage.setItem('applications', JSON.stringify(applications));
-    localStorage.setItem('id', id);
-  }
-
-  return JSON.parse(localStorage.getItem('applications'));
-};
-
 const createAppCard = (app) => {
   return `
   <!-- https://stackoverflow.com/questions/39031224/how-to-center-cards-in-bootstrap-4 -->
@@ -14,7 +5,7 @@ const createAppCard = (app) => {
     <div class="row g-0">
       <div class="col-md-4">
         <img 
-          src="images/${app.id}/${app.imageUrl}"
+          src="../images/${app.id}/${app.imageUrl}"
           class="img-fluid app-logo"
           alt="Logo of ${app.name}"
           style="height: 10rem;"
