@@ -1,3 +1,5 @@
+import { getData } from '../services/data.js';
+
 const createAppCard = (app) => {
   return `
   <!-- https://stackoverflow.com/questions/39031224/how-to-center-cards-in-bootstrap-4 -->

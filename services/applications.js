@@ -50,3 +50,5 @@ let applications = [
           'companyName': "KahMonit (C)"
       }
   ];
+
+  export { id, applications };

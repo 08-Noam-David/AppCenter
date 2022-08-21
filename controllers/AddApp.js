@@ -1,3 +1,5 @@
+import { addItemToTheList, getNextId } from '../services/data.js';
+
 const handlePublishForm = (event) => {
   event.preventDefault();
   const form = event.target;

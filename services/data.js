@@ -1,3 +1,5 @@
+import { applications, id } from "./applications";
+
 const addItemToTheList = (data) => {
   localStorage.setItem(
     'applications',
@@ -22,3 +24,5 @@ const getNextId = () => {
 
   return id;
 };
+
+export { addItemToTheList, getData, getNextId };
