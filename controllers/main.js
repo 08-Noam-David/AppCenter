@@ -9,7 +9,7 @@ const createAppCard = (app) => {
           class="img-fluid app-logo"
           alt="Logo of ${app.name}"
           style="height: 10rem;"
-          onerror="this.src = 'images/Help.png';"
+          onerror="this.src = '../images/Help.png';"
         />
       </div>
       <div class="col-md-8">
