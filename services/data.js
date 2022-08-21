@@ -1,4 +1,4 @@
-import { applications, id } from "./applications";
+import { applications, id } from "./applications.js";
 
 const addItemToTheList = (data) => {
   localStorage.setItem(
