@@ -6,8 +6,8 @@ const app = express();
 app.use(express.json());
 
 // Staic files
-const __dirname = fileURLToPath(import.meta.url);
-const staticPath = resolve(__dirname, '../..', 'client/');
+const __filename = fileURLToPath(import.meta.url);
+const staticPath = resolve(__filename, '../..', 'client/');
 app.use('/', express.static(staticPath));
 
 const port = process.env.PORT || 3000;
