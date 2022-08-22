@@ -7,11 +7,11 @@ const createAppCard = (app) => {
     <div class="row g-0">
       <div class="col-md-4">
         <img 
-          src="../images/${app.id}/${app.imageUrl}"
+          src="../assets/images/${app.id}/${app.imageUrl}"
           class="img-fluid app-logo"
           alt="Logo of ${app.name}"
           style="height: 10rem;"
-          onerror="this.src = '../images/Help.png';"
+          onerror="this.src = '../assets/images/Help.png';"
         />
       </div>
       <div class="col-md-8">
