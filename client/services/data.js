@@ -9,8 +9,14 @@ const addItemToTheList = (data) => {
   );
 };
 
-const getData = async () => {
-  const res = await fetch(`${baseUrl}/api/apps`);
+const getData = async (search = '') => {
+  const queryParams = new URLSearchParams({
+    search,
+  });
+
+  const res = await fetch(
+    `${baseUrl}/api/apps${search ? `?${queryParams}` : ''}`
+  );
   return res.json();
 };
 

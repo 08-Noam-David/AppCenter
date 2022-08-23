@@ -1,5 +1,5 @@
 import { pool } from './database.js';
-import { normalizeAppProperties } from './utils.js';
+import { normalizeAppProperties as normalize } from './utils.js';
 
 const executeQuery = async (query, params) => {
   const client = await pool.connect();
@@ -16,16 +16,32 @@ const executeQuery = async (query, params) => {
 const getAllApps = async () => {
   const result = await executeQuery(`
     SELECT app_id, 
-        image_url,
-        app_name,
-        price,
-        description,
-        company_name,
-        created_at
+      image_url,
+      app_name,
+      price,
+      description,
+      company_name,
+      created_at
     FROM t_applications
     `);
 
-  return result.rows.map(normalizeAppProperties);
+  return result.rows.map(normalize);
 };
 
-export { getAllApps };
+const searchForApps = async (searchQuery) => {
+  const result = await executeQuery(`
+  SELECT app_id, 
+    image_url,
+    app_name,
+    price,
+    description,
+    company_name,
+    created_at
+  FROM t_applications
+  WHERE app_name LIKE ('%' || $1 || '%')
+  `, [searchQuery]);
+
+  return result.rows.map(normalize);
+}
+
+export { getAllApps, searchForApps };

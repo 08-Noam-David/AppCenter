@@ -4,7 +4,7 @@ import cors from 'cors';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { getAllApps } from './queries.js';
+import { getAllApps, searchForApps } from './queries.js';
 
 const app = express();
 app.use(express.json());
@@ -24,8 +24,16 @@ const staticPath = resolve(__filename, '../..', 'client/');
 app.use('/', express.static(staticPath));
 
 app.get('/api/apps', async (req, res) => {
+  const searchQuery = req.query.search;
+  let apps;
+
   try {
-    const apps = await getAllApps();
+    if(searchQuery) {
+      apps = await searchForApps(searchQuery);
+    } else {
+      apps = await getAllApps();
+    }
+
     res.send(apps);
   } catch (ex) {
     console.log(ex);
