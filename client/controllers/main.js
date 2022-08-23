@@ -92,22 +92,22 @@ const renderAppData = (arr) => {
   // );
 };
 
-const handleSearch = (event) => {
-  const query = event.target.value.trim();
+// const handleSearch = (event) => {
+//   const query = event.target.value.trim();
 
-  if (query !== '') {
-    const data = getData().filter((app) =>
-      app.name.toLowerCase().includes(query.toLowerCase())
-    );
+//   if (query !== '') {
+//     const data = getData().filter((app) =>
+//       app.name.toLowerCase().includes(query.toLowerCase())
+//     );
 
-    renderAppData(data);
-  } else {
-    renderAppData(getData());
-  }
-};
+//     renderAppData(data);
+//   } else {
+//     renderAppData(getData());
+//   }
+// };
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderAppData(getData());
+document.addEventListener('DOMContentLoaded', async () => {
+  renderAppData(await getData());
 
-  document.querySelector('#searchBox').addEventListener('input', handleSearch);
+  // document.querySelector('#searchBox').addEventListener('input', handleSearch);
 });

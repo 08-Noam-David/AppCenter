@@ -1,4 +1,4 @@
-import { applications, id } from "./applications.js";
+const baseUrl = 'http://localhost:3000'
 
 const addItemToTheList = (data) => {
   localStorage.setItem(
@@ -9,13 +9,9 @@ const addItemToTheList = (data) => {
   );
 };
 
-const getData = () => {
-  if (localStorage.getItem('applications') == null) {
-    localStorage.setItem('applications', JSON.stringify(applications));
-    localStorage.setItem('id', id);
-  }
-
-  return JSON.parse(localStorage.getItem('applications'));
+const getData = async () => {
+  const res = await fetch(`${baseUrl}/api/apps`);
+  return res.json();
 };
 
 const getNextId = () => {
