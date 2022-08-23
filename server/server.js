@@ -28,7 +28,7 @@ app.get('/api/apps', async (req, res) => {
     const apps = await getAllApps();
     res.send(apps);
   } catch (ex) {
-    console.log(ex)
+    console.log(ex);
     res.status(500).send('Something went wrong. Please try later.');
   }
 });
