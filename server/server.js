@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -6,6 +8,15 @@ import { getAllApps } from './queries.js';
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 // Staic files
 const __filename = fileURLToPath(import.meta.url);
