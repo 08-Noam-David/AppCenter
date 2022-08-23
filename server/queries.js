@@ -44,4 +44,28 @@ const searchForApps = async (searchQuery) => {
   return result.rows.map(normalize);
 }
 
-export { getAllApps, searchForApps };
+const createApp = async (app) => {
+  const result = await executeQuery(`
+  INSERT
+  INTO t_applications (
+    app_id, 
+    image_url,
+    app_name,
+    price,
+    description,
+    company_name
+  )
+  VALUES ($1, $2, $3, $4::money, $5, $6)
+  `, [
+    app.id,
+    app.imageUrl,
+    app.name,
+    app.price,
+    app.desc,
+    app.companyName
+  ]);
+
+  return result.rowCount === 1;
+}
+
+export { getAllApps, searchForApps, createApp };

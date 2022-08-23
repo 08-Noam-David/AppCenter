@@ -1,10 +1,15 @@
 import express from 'express';
 import cors from 'cors';
+import { nanoid } from 'nanoid/async';
+
+// 
+import Joi from 'joi';
 
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { getAllApps, searchForApps } from './queries.js';
+import { getAllApps, searchForApps, createApp } from './queries.js';
+import { validateApp } from './utils.js';
 
 const app = express();
 app.use(express.json());
@@ -28,7 +33,7 @@ app.get('/api/apps', async (req, res) => {
   let apps;
 
   try {
-    if(searchQuery) {
+    if (searchQuery) {
       apps = await searchForApps(searchQuery);
     } else {
       apps = await getAllApps();
@@ -38,6 +43,32 @@ app.get('/api/apps', async (req, res) => {
   } catch (ex) {
     console.log(ex);
     res.status(500).send('Something went wrong. Please try later.');
+  }
+});
+
+app.post('/api/apps', async (req, res) => {
+  try {
+    const [formData, id] = await Promise.all([validateApp(req.body), nanoid()]);
+
+    const newApp = {
+      id,
+      ...formData,
+    };
+
+    const result = await createApp(newApp);
+
+    if (result) {
+      res.send(newApp);
+    } else {
+      res.status(500).send('Something went wrong. Please try later.');
+    }
+  } catch (ex) {
+    if (ex instanceof Joi.ValidationError) {
+      res.status(404).send(ex.details.map((err) => err.message));
+    } else {
+      res.status(500).send('Something went wrong. Please try later.');
+      console.log(ex);
+    }
   }
 });
 
