@@ -1,4 +1,5 @@
-import { getData } from '../services/data.js';
+import { getData, deleteApp } from '../services/data.js';
+import { Toast } from 'bootstrap';
 
 const createAppCard = (app) => {
   return `
@@ -49,47 +50,49 @@ const createAppCard = (app) => {
   `;
 };
 
-// const handleRemoveButtonClick = (event) => {
-//   const id = parseInt(event.currentTarget.dataset.appId);
+const handleRemoveButtonClick = async (event) => {
+  const id = event.currentTarget.dataset.appId;
+  const toastBody = document.querySelector('#removalToast .toast-body');
 
-//   const indexToRemove = data.findIndex((app) => app.id === id);
-//   if (indexToRemove !== -1) {
-//     const removedApp = data.splice(indexToRemove, 1);
+  try {
+    const removedApp = await deleteApp(id);
 
-//     const toastBody = document.querySelector('#removalToast .toast-body');
-//     toastBody.textContent = `${removedApp.name} successfuly deleted.`;
+    toastBody.textContent = `${removedApp.name} successfuly deleted.`;
 
-//     const toast = new bootstrap.Toast(document.querySelector('#removalToast'));
-//     toast.show();
-
-//     /*
-//      * In case the user deletes an app while a search is active, the would
-//      * be the need to re-render the list whilst keeping the query active,.
-//      * Ideally, would've been done via a seperate method, but I
-//      * don't think that's possible due to hoisting shenanigans.
-//      * So it's done via triggering an 'input' event on #searchBox.
-//      */
-//     document.querySelector('#searchBox').dispatchEvent(
-//       new Event('input', {
-//         bubbles: true,
-//         cancelable: true,
-//       })
-//     );
-//   }
-// };
+    /*
+    * In case the user deletes an app while a search is active, the would
+    * be the need to re-render the list whilst keeping the query active,.
+    * Ideally, would've been done via a seperate method, but I
+    * don't think that's possible due to hoisting shenanigans.
+    * So it's done via triggering an 'input' event on #searchBox.
+    */
+    document.querySelector('#searchBox').dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+  } catch (ex) {
+    console.log(ex);
+    toastBody.textContent = 'Something wrong happened.';
+  } finally {
+    const toast = new Toast(document.querySelector('#removalToast'));
+    toast.show();
+  }
+};
 
 const renderAppData = (arr) => {
-  // [...document.querySelectorAll('.remove-button')].forEach((el) =>
-  //   el.removeEventListener('click', handleRemoveButtonClick)
-  // );
+  [...document.querySelectorAll('.remove-button')].forEach((el) =>
+    el.removeEventListener('click', handleRemoveButtonClick)
+  );
 
   const appCardList = document.querySelector('main');
 
   appCardList.innerHTML = arr.map(createAppCard).join('');
 
-  // [...document.querySelectorAll('.remove-button')].forEach((el) =>
-  //   el.addEventListener('click', handleRemoveButtonClick)
-  // );
+  [...document.querySelectorAll('.remove-button')].forEach((el) =>
+    el.addEventListener('click', handleRemoveButtonClick)
+  );
 };
 
 const handleSearch = async (event) => {

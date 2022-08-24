@@ -21,4 +21,12 @@ const getData = async (search = '') => {
   return res.json();
 };
 
-export { addItemToTheList, getData };
+const deleteApp = async (id) => {
+  const response = await fetch(`${baseUrl}/api/apps/${id}`, {
+    method: 'DELETE'
+  });
+
+  return response.json();
+};
+
+export { addItemToTheList, getData, deleteApp };
