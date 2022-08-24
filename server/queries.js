@@ -42,7 +42,7 @@ const searchForApps = async (searchQuery) => {
   `, [searchQuery]);
 
   return result.rows.map(normalize);
-}
+};
 
 const createApp = async (app) => {
   const result = await executeQuery(`
@@ -66,6 +66,32 @@ const createApp = async (app) => {
   ]);
 
   return result.rowCount === 1;
-}
+};
 
-export { getAllApps, searchForApps, createApp };
+const deleteApp = async (id) => {
+  const result = await executeQuery(`
+  DELETE
+  FROM t_applications
+  WHERE app_id = $1
+  `, [id]);
+
+  return result.rowCount === 1;
+};
+
+const findSpecificApp = async (id) => {
+  const result = await executeQuery(`
+  SELECT app_id, 
+    image_url,
+    app_name,
+    price,
+    description,
+    company_name,
+    created_at
+  FROM t_applications
+  WHERE app_id = $1
+  `, [id]);
+
+  return result.rows.map(normalize);
+};
+
+export { getAllApps, searchForApps, createApp, deleteApp, findSpecificApp };

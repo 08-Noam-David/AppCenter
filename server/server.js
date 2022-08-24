@@ -6,7 +6,7 @@ import Joi from 'joi';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { getAllApps, searchForApps, createApp } from './queries.js';
+import { getAllApps, searchForApps, createApp, deleteApp, findSpecificApp } from './queries.js';
 import { validateApp } from './utils.js';
 
 const app = express();
@@ -45,7 +45,6 @@ app.get('/api/apps', async (req, res) => {
 
 app.post('/api/apps', async (req, res) => {
   try {
-
     const [formData, id] = await Promise.all([validateApp(req.body), nanoid()]);
 
     const newApp = {
@@ -66,6 +65,23 @@ app.post('/api/apps', async (req, res) => {
     } else {
       res.status(500).send('Something went wrong. Please try later.');
     }
+  }
+});
+
+app.delete('/api/apps/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const toBeDeleted = await findSpecificApp(id);
+
+    if(toBeDeleted) {
+      await deleteApp(id);
+      res.send(toBeDeleted[0]);
+    } else {
+      res.statusCode(404).send('The app you wanted to delete doesn\'t exist.');
+    }
+  } catch (ex) {
+    res.status(500).send('Something went wrong. Please try later.');
   }
 });
 
