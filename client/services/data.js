@@ -1,12 +1,13 @@
 const baseUrl = 'http://localhost:3000';
 
 const addItemToTheList = (data) => {
-  localStorage.setItem(
-    'applications',
-    JSON.stringify(
-      JSON.parse(localStorage.getItem('applications')).concat(data)
-    )
-  );
+  return fetch(`${baseUrl}/api/apps`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
 };
 
 const getData = async (search = '') => {
@@ -20,11 +21,4 @@ const getData = async (search = '') => {
   return res.json();
 };
 
-const getNextId = () => {
-  let id = localStorage.getItem('id');
-  localStorage.setItem('id', ++id);
-
-  return id;
-};
-
-export { addItemToTheList, getData, getNextId };
+export { addItemToTheList, getData };

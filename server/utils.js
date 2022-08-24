@@ -30,15 +30,15 @@ const normalizeAppProperties = (app) => {
 };
 
 const appSchema = Joi.object({
-  imageUrl: Joi.string().max(300),
+  imageUrl: Joi.string().max(300).empty(''),
   name: Joi.string()
     .required()
     .min(4)
     .max(30)
     .regex(/[a-zA-Z0-9][a-zA-Z0-9\s]*[a-zA-Z0-9]/),
   price: Joi.number().required().precision(2).min(0.0),
-  desc: Joi.string().max(500),
-  companyName: Joi.string().max(),
+  desc: Joi.string().max(500).empty(''),
+  companyName: Joi.string().max(30).empty(''),
 });
 
 const validateApp = (app) => appSchema.validateAsync(app, { convert: false });

@@ -1,8 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import { nanoid } from 'nanoid/async';
-
-// 
 import Joi from 'joi';
 
 import { resolve } from 'node:path';
@@ -41,13 +39,13 @@ app.get('/api/apps', async (req, res) => {
 
     res.send(apps);
   } catch (ex) {
-    console.log(ex);
     res.status(500).send('Something went wrong. Please try later.');
   }
 });
 
 app.post('/api/apps', async (req, res) => {
   try {
+
     const [formData, id] = await Promise.all([validateApp(req.body), nanoid()]);
 
     const newApp = {
@@ -64,10 +62,9 @@ app.post('/api/apps', async (req, res) => {
     }
   } catch (ex) {
     if (ex instanceof Joi.ValidationError) {
-      res.status(404).send(ex.details.map((err) => err.message));
+      res.status(400).send(ex.details.map((err) => err.message));
     } else {
       res.status(500).send('Something went wrong. Please try later.');
-      console.log(ex);
     }
   }
 });

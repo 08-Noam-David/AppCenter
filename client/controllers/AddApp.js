@@ -1,6 +1,8 @@
-import { addItemToTheList, getNextId } from '../services/data.js';
+import { Toast } from '../assets/bootstrap.esm.min.js';
 
-const handlePublishForm = (event) => {
+import { addItemToTheList } from '../services/data.js';
+
+const handlePublishForm = async (event) => {
   event.preventDefault();
   const form = event.target;
   const alert = document.querySelector('#invalidAlert');
@@ -16,16 +18,25 @@ const handlePublishForm = (event) => {
 
     alert.remove();
 
-    addItemToTheList({
-      id: getNextId(),
-      imageUrl: form.elements['ImageUrl'].value,
-      name: form.elements['name'].value,
-      price: form.elements['price'].value,
-      desc: form.elements['description'].value,
-      companyName: form.elements['companyName'].value,
-    });
+    try {
+      const response = await addItemToTheList({
+        imageUrl: form.elements['ImageUrl'].value,
+        name: form.elements['name'].value,
+        price: parseFloat(form.elements['price'].value),
+        desc: form.elements['description'].value,
+        companyName: form.elements['companyName'].value,
+      });
 
-    location.assign('mainPage.html');
+      if(!response.ok) {
+        console.log(await response.json());
+        throw new Error('Ooops');
+      }
+
+      location.assign('mainPage.html');
+    } catch (error) {
+      const toast = new Toast(document.querySelector('#failureToast'));
+      toast.show();
+    }
   } else {
     if (!form.classList.contains('was-validated')) {
       form.classList.add('was-validated');
